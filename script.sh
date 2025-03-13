@@ -110,8 +110,17 @@ show_loader() {
     echo -ne "\r\033[K"
 }
 
+# Funcion para hacer un push con git
+backup() {
+    echo -ne "\n ${BLUE}Haciendo backup...${RESET}"
+    git add .
+    git commit -m "Backup"
+    git push origin main
+}
+
 # Función para manejar la eliminación
 handle_deletion() {
+
     # Leer los archivos del archivo temporal
     mapfile -t FILES_TO_REMOVE < /tmp/files_to_remove.tmp
     rm -f /tmp/files_to_remove.tmp  # Limpiar archivo temporal
@@ -130,6 +139,7 @@ handle_deletion() {
     fi
     # Preguntar al usuario
     if [[ $confirm == [sS] ]]; then
+        backup
         echo -e "${BLUE}Eliminando archivos...${RESET}"
         for file in "${FILES_TO_REMOVE[@]}"; do
             if [ -f "$file" ]; then
