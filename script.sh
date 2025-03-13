@@ -113,9 +113,9 @@ show_loader() {
 # Funcion para hacer un push con git
 backup() {
     echo -ne "\n ${BLUE}Haciendo backup...${RESET}"
-    git add .
-    git commit -m "Backup"
-    git push origin main
+    git add . > /dev/null
+    git commit -m "Backup Hecho por Script" > /dev/null
+    git push origin main > /dev/null
 }
 
 # Función para manejar la eliminación
